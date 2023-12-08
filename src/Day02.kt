@@ -1,5 +1,4 @@
 fun main() {
-
     fun whichLimitIsvalidForColor(color: String, anzahl: Int): Boolean {
         when (color) {
             "blue" -> return anzahl < 15
@@ -71,13 +70,13 @@ fun main() {
         return resultNegativList
     }
 
-     fun part1(text: List<String>) :Int{
+    fun part1(text: List<String>): Int {
         val games = parseAllGames(text)
         val invalidGames = scanCubeIfTheyExceedThelimit(games)
         return games.map { g -> g.id }.toList().minus(invalidGames.toSet()).sum()
     }
 
-     fun part2(text: List<String>):Int {
+    fun part2(text: List<String>): Int {
         val games = parseAllGames(text)
         return detectMaximumCubesNeededAtLeast(games)
     }
