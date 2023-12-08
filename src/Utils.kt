@@ -29,3 +29,17 @@ class FileReader {
         fun readFileDirectlyAsText(fileName: String): String = File("src/$fileName.txt").readText(Charsets.UTF_8)
     }
 }
+
+fun parseTextWithTitleAndSeparator(text: String, titleSeparator: String) =
+    text.substring(text.indexOf(titleSeparator) + 2, text.length)
+        .trim()
+        .split(" ")
+        .map { s -> s.trim() }
+        .filter { s -> s.isNotBlank() }
+        .map { s -> s.toLong() }
+
+
+
+fun parseTextWithTitleAndSeparator(text: List<String>, titleSeparator: String) =
+    text.map { t -> parseTextWithTitleAndSeparator(t, titleSeparator) }
+
