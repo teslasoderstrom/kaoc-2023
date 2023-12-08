@@ -40,7 +40,6 @@ fun main() {
         return sumOverAllLines
     }
 
-    @Test
     fun part2(input: String): Int {
         val lines: List<String> = FileReader.readFileAsLinesUsingReadLines(input)
         var sumOverAllLines = 0
