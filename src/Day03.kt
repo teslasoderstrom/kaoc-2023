@@ -130,11 +130,11 @@ fun main() {
     check(part1(inputPart1Test) == 4361)
 
     val inputPart1 = FileReader.readFileAsLinesUsingReadLines("Day03_part1")
-    check(part1(inputPart1) == 530495)
+    check(part1(inputPart1) == 509115)
 
     check(part2(inputPart1Test) == 467835)
 
-    check(part2(inputPart1) == 80253814)
+    check(part2(inputPart1) == 75220503)
 }
 
 data class Occurence(

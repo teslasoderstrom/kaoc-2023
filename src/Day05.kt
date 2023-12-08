@@ -111,11 +111,11 @@ fun main() {
     check(calculatePart1(inputPart1Test) == 35L)
 
     val inputPart1 = FileReader.readFileDirectlyAsText("Day05_part1")
-    check(calculatePart1(inputPart1) == 51580674L)
+    check(calculatePart1(inputPart1) == 525792406L)
 
     check(calculatePart2(inputPart1Test) == 46L)
 
-    check(calculatePart2(inputPart1) == 99751240L)
+    check(calculatePart2(inputPart1) == 79004094L)
 }
 
 data class GeneralSeedMap(

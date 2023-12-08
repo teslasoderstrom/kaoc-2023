@@ -85,11 +85,11 @@ fun main() {
     check(part1(inputPart1Test) == 8)
 
     val inputPart1 = FileReader.readFileAsLinesUsingReadLines("Day02_part1")
-    check(part1(inputPart1) == 2600)
+    check(part1(inputPart1) == 2486)
 
     check(part2(inputPart1Test) == 2286)
 
-    check(part2(inputPart1) == 86036)
+    check(part2(inputPart1) == 87984)
 }
 
 data class GameDto(

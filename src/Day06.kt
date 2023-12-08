@@ -30,13 +30,13 @@ fun main() {
     check(part1(inputPart1Test, 1) == 288L)
 
     val inputPart1 = FileReader.readFileAsLinesUsingReadLines("Day06_part1")
-    check(part1(inputPart1, 1) == 1312850L)
+    check(part1(inputPart1, 1) == 3316275L)
 
     val inputPart2Test = FileReader.readFileAsLinesUsingReadLines("Day06_part2Test")
     check(part1(inputPart2Test, 14) == 71503L)
 
     val inputPart2 = FileReader.readFileAsLinesUsingReadLines("Day06_part2")
-    check(part1(inputPart2, 14) == 36749103L)
+    check(part1(inputPart2, 14) == 27102791L)
 }
 
 data class Race(

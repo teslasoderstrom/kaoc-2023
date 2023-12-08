@@ -1,5 +1,4 @@
 import Day01Util.Companion.REPLACEMAP
-import org.junit.jupiter.api.Test
 
 fun main() {
     fun locateKeyWords(text: String, keyWord: String): Pair<Int, Int>? {
@@ -60,13 +59,13 @@ fun main() {
     check(part1(inputPart1Test) == 142)
 
     val inputPart1 = "Day01_part1"
-    check(part1(inputPart1) == 54644)
+    check(part1(inputPart1) == 55002)
 
     val inputPart2Test = "Day01_part2Test"
     check(part2(inputPart2Test) == 281)
 
     val inputPart2 = "Day01_part2"
-    check(part2(inputPart2) == 53348)
+    check(part2(inputPart2) == 55093)
 }
 
 class Day01Util {

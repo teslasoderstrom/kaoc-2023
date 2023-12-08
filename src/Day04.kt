@@ -30,5 +30,5 @@ fun main() {
     check(part1(inputPart1Test) == 13)
 
     val inputPart1 = FileReader.readFileAsLinesUsingReadLines("Day04_part1")
-    check(part1(inputPart1) == 22897)
+    check(part1(inputPart1) == 26914)
 }
