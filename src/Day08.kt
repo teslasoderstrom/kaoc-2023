@@ -14,7 +14,7 @@ fun main() {
         return Network(instructions, networkMap)
     }
 
-    fun navigate(network: Network): Int {
+    fun navigatePart1(network: Network): Int {
         var instructions = 0
         var step = "AAA"
         var stepCounter = 0
@@ -32,10 +32,45 @@ fun main() {
         return stepCounter
     }
 
+    fun nextStep(step: List<String>, direction: Char, network: Network): List<String> {
+        val steps = mutableListOf<String>()
+        for (s in step) {
+            if (direction == 'R') {
+                steps.add(network.networkMap[s]!!.second)
+            } else {
+                steps.add(network.networkMap[s]!!.first)
+            }
+        }
+        return steps
+    }
+
+    fun navigatePart2(network: Network): Int {
+        var instructions = 0
+
+        var steps = network.networkMap.keys.filter { k -> k.endsWith("A") }
+        var stepCounter = 0
+        val origNumber = steps.size
+        while (steps.filter { t -> t.endsWith("Z") }.size != origNumber) {
+            val currentStep = network.instructions[instructions++]
+            steps = nextStep(steps, currentStep, network)
+
+            if (instructions >= network.instructions.length) {
+                instructions = 0
+            }
+            stepCounter++
+        }
+        return stepCounter
+    }
+
     fun calculatePart1(text: List<String>): Int {
         val network = buildUpNetwork(text)
-        val steps = navigate(network)
+        return navigatePart1(network)
+    }
 
+    fun calculatePart2(text: List<String>): Int {
+        val network = buildUpNetwork(text)
+        val steps = navigatePart2(network)
+        println("P2: $steps")
         return steps
     }
 
@@ -43,17 +78,21 @@ fun main() {
         return calculatePart1(text)
     }
 
+    fun part2(text: List<String>): Int {
+        return calculatePart2(text)
+    }
+
     val inputPart1Test = FileReader.readFileAsLinesUsingReadLines("Day08_part1Test")
-    check(part1(inputPart1Test) == 2)
+    check(part1(inputPart1Test) == 6)
 
     val inputPart1 = FileReader.readFileAsLinesUsingReadLines("Day08_part1")
     check(part1(inputPart1) == 13207)
 
     val inputPart2Test = FileReader.readFileAsLinesUsingReadLines("Day08_part2Test")
-    check(part1(inputPart2Test) == 71503)
+    check(part2(inputPart2Test) == 6)
 
     val inputPart2 = FileReader.readFileAsLinesUsingReadLines("Day08_part2")
-    check(part1(inputPart2) == 36749103)
+    check(part2(inputPart2) == 36749103)
 }
 
 data class Network(

@@ -38,8 +38,18 @@ fun parseTextWithTitleAndSeparator(text: String, titleSeparator: String) =
         .filter { s -> s.isNotBlank() }
         .map { s -> s.toLong() }
 
-
-
 fun parseTextWithTitleAndSeparator(text: List<String>, titleSeparator: String) =
     text.map { t -> parseTextWithTitleAndSeparator(t, titleSeparator) }
 
+fun separateStringByEmptyStringToLong(text: List<String>): MutableList<MutableList<Long>> {
+    val numberLists: MutableList<MutableList<Long>> = mutableListOf()
+    val y = text.forEach { t ->
+        val numberList = mutableListOf<Long>()
+        t.split(" ")
+            .forEach { l ->
+                numberList.add(l.toLong())
+            }
+        numberLists.add(numberList)
+    }
+    return numberLists
+}
