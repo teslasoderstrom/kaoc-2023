@@ -6,50 +6,42 @@ fun main() {
     val expressionParser: ExpressionParser = SpelExpressionParser()
     var wflows: Map<String, List<String>> = emptyMap()
 
+     val ACCEPTED: String = "A"
+     val REJECTED: String = "R"
+
     fun parseExpression(express: String): Boolean {
         val expression: Expression = expressionParser.parseExpression(express)
-//        println("parseExpression: $express -> ${expression.value}")
         return expression.value as Boolean
     }
 
     fun calculateExpression(rating: MutableMap<String, Int>): Long {
-        var result = ""
         var sumOfAccepted = 0L
 
-        val initialWFlow = "in"
-        var flowKey = initialWFlow
+        var flowKey = "in"
         var counter = 0
-        var flowStep = ""
+        var step: String
         do {
-            flowStep = wflows[flowKey]!![counter++]
-
-            var ind = flowStep.indexOf(":")
-
-            println("-----")
+            step = wflows[flowKey]!![counter++]
+            val ind = step.indexOf(":")
+            val workFlowResult = step.substring(step.indexOf(":") + 1, step.length)
             if (ind >= 0) {
-                val workFlowCondition = flowStep.substring(0, ind)
-                val workFlowResult = flowStep.substring(flowStep.indexOf(":") + 1, flowStep.length)
+                val workFlowCondition = step.substring(0, ind)
+
                 val placeholderRemoved = workFlowCondition.replace(
                     workFlowCondition.substring(0, 1),
                     rating[workFlowCondition.substring(0, 1)].toString(),
                 )
-                val parsed = parseExpression(placeholderRemoved)
-                if (parsed) {
+                if (parseExpression(placeholderRemoved)) {
                     flowKey = workFlowResult
                     counter = 0
                 }
-                println("workFlowCondition: $workFlowCondition ($placeholderRemoved) -> $parsed")
-                println("flowKey by cond: $flowKey -> ${wflows[flowKey]} / counter: $counter")
             } else {
                 counter = 0
-                println("flowKey direct: $flowKey -> ${wflows[flowKey]!![counter]}")
-                println("flowKey new: $flowKey -> ${wflows[flowKey]!![counter]}")
-                flowKey = flowStep.substring(flowStep.indexOf(":") + 1, flowStep.length)
+                flowKey = workFlowResult
             }
-        } while (flowKey != "A" && flowKey != "R" && counter < wflows[flowKey]!!.size)
-        if (flowKey == "A") {
+        } while (flowKey != ACCEPTED && flowKey != REJECTED && counter < wflows[flowKey]!!.size)
+        if (flowKey == ACCEPTED) {
             sumOfAccepted += rating.values.sum().toLong()
-//            println("Accepted $rating = $sumOfAccepted")
         }
         return sumOfAccepted
     }
@@ -58,7 +50,6 @@ fun main() {
         var sumOfAccepted = 0L
         val (_, ratingsText) = text.split("\n\n")
 
-        val allRatings = mutableListOf<Map<String, Int>>()
         ratingsText.trim().split("\n")
             .forEach { r ->
                 val rating = mutableMapOf<String, Int>()
@@ -68,11 +59,8 @@ fun main() {
                     val v = rr.substring(rr.indexOf("=") + 1, rr.length).toInt()
                     rating[k] = v
                 }
-                allRatings.add(rating)
-
                 sumOfAccepted += calculateExpression(rating)
             }
-
         return sumOfAccepted
     }
 
@@ -84,7 +72,6 @@ fun main() {
             workflowMap[workflow.substring(0, workflow.indexOf("{"))] =
                 workflow.substring(workflow.indexOf("{") + 1, workflow.indexOf("}")).split(",").toList()
         }
-//        workflowMap.forEach { w -> println("Workflow $w") }
         return workflowMap
     }
 
@@ -104,9 +91,5 @@ fun main() {
     println(sumOfAccepted)
     check(sumOfAccepted == 368523L)
 
-//    val inputPart2Test = FileReader.readFileAsLinesUsingReadLines("Day13_part2Test")
-//    check(part1(inputPart2Test) == 71503)
-//
-//    val inputPart2 = FileReader.readFileAsLinesUsingReadLines("Day13_part2")
-//    check(part1(inputPart2) == 36749103)
 }
+
