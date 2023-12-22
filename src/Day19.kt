@@ -6,8 +6,8 @@ fun main() {
     val expressionParser: ExpressionParser = SpelExpressionParser()
     var wflows: Map<String, List<String>> = emptyMap()
 
-     val ACCEPTED: String = "A"
-     val REJECTED: String = "R"
+    val ACCEPTED: String = "A"
+    val REJECTED: String = "R"
 
     fun parseExpression(express: String): Boolean {
         val expression: Expression = expressionParser.parseExpression(express)
@@ -90,6 +90,4 @@ fun main() {
 
     println(sumOfAccepted)
     check(sumOfAccepted == 368523L)
-
 }
-
